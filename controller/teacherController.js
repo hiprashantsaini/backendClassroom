@@ -63,11 +63,11 @@ const loginStudent=async(req,res)=>{
             rollno:data.rollno,
             role:data.role
         }
-        const token=jwt.sign(user,SECRET_KEY);
+        const token=jwt.sign(user,process.env.SECRET_KEY);
         console.log("t data :",data);
         res.status(200).send({status:true,message:"Login successfull",info:data,token:token});
     } catch (error) {
-        console.log("loginTeacher :",error.message);
+        console.log("loginStudent :",error.message);
         res.status(500).send({status:false,message:"Internal server error"})
     }
 }

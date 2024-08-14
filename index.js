@@ -6,7 +6,7 @@ const troute = require('./routes/teacherRoute');
 const bcrypt=require('bcryptjs');
 const principal = require('./models/principal');
 require('dotenv').config();
-mongoose.connect('mongodb://127.0.0.1:27017/ClassRoom');
+mongoose.connect(`mongodb+srv://${process.env.DATABASE_USER}:${process.env.DATABASE_PASSWORD}@cluster0.qijrm.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`);
 const app=express();
 
 app.use(express.json());
@@ -23,8 +23,6 @@ const registerAdmin=async()=>{
 
     await principalData.save();
 }
-
-console.log("env ",process.env.SECRET_KEY);
 
 app.use('/api',proute);
 app.use('/teacher',troute);
