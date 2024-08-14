@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken');
-const config = require('../config');
 
 //// both working 
 // const isLogin = (req, res, next) => {
@@ -9,7 +8,7 @@ const config = require('../config');
 //       if (!token) {
 //          return res.status(401).send({status:false,message:"Authentication failed!: Invalid token or token required.Login Again"});
 //       }
-//       jwt.verify(token, config.SECRET_KEY, (err, resolve) => {
+//       jwt.verify(token, process.env.SECRET_KEY, (err, resolve) => {
 //          if (err) {
 //             return res.status(401).send({status:false,message:"Authentication failed!: Invalid token or token required. Login Again."});
 //          }
@@ -43,7 +42,7 @@ const isLogin = (req, res, next) => {
          return res.status(401).send({status: false, message: "Authentication failed! Invalid token or token required. Login Again"});
       }
 
-      jwt.verify(token, config.SECRET_KEY, (err, resolve) => {
+      jwt.verify(token, process.env.SECRET_KEY, (err, resolve) => {
          if (err) {
             return res.status(401).send({status: false, message: "Authentication failed! Invalid token or token required. Login Again."});
          }
@@ -75,7 +74,7 @@ const isLogout = (req, res, next) => {
       if (!token) {
          next();
       }
-      jwt.verify(token, config.SECRET_KEY, (err, resolve) => {
+      jwt.verify(token, process.env.SECRET_KEY, (err, resolve) => {
          if (err) {
             next();
          }
